@@ -46,20 +46,20 @@
                     </p>
                     <div class="control-group">
                       <div class="controls">
-                        <input type="text" placeholder="boss@acme.com">
+                        <input type="text" name="email1" placeholder="boss@acme.com">
                       </div>
                     </div>
                     <div class="control-group">
                       <div class="controls">
-                        <input type="text" placeholder="friend@getsome.com">
+                        <input type="text" name="email2" placeholder="friend@getsome.com">
                       </div>
                     </div>
                     <div class="control-group">
                       <div class="controls">
-                        <input type="text" placeholder="sig_other@ifonly.com">
+                        <input type="text" name="email3" placeholder="sig_other@ifonly.com">
                       </div>
                     </div>
-                    <button class="btn btn-primary btn-large carousel-next">
+                    <button class="btn btn-primary btn-large carousel-next ask">
                       Ask &raquo;
                     </button>
                   </form>
@@ -70,9 +70,7 @@
                   <form class="form-horizontal">
                     <h3>Relationship</h3>
                     <div class="control-group">
-                      <label class="control-label">
-                        boss@acme.com
-                      </label>
+                      <label class="control-label email1"></label>
                       <div class="controls">
                         <select>
                           <option>Manager</option>
@@ -83,9 +81,7 @@
                       </div>
                     </div>
                     <div class="control-group">
-                      <label class="control-label">
-                        friend@getsome.com
-                      </label>
+                      <label class="control-label email2"></label>
                       <div class="controls">
                         <select>
                           <option>Manager</option>
@@ -96,9 +92,7 @@
                       </div>
                     </div>
                     <div class="control-group">
-                      <label class="control-label">
-                        sig_other@ifonly.com
-                      </label>
+                      <label class="control-label email3"></label>
                       <div class="controls">
                         <select>
                           <option>Manager</option>
@@ -125,9 +119,7 @@
                     your feedback requests.
                     </p>
                     <div class="control-group">
-                      <label class="control-label">
-                        boss@acme.com
-                      </label>
+                      <label class="control-label email1"></label>
                       <div class="controls">
                         <label class="checkbox">
                           <input type="checkbox"> General
@@ -138,9 +130,7 @@
                       </div>
                     </div>
                     <div class="control-group">
-                      <label class="control-label">
-                        friend@getsome.com
-                      </label>
+                      <label class="control-label email2"></label>
                       <div class="controls">
                         <label class="checkbox">
                           <input type="checkbox"> General
@@ -151,9 +141,7 @@
                       </div>
                     </div>
                     <div class="control-group">
-                      <label class="control-label">
-                        sig_other@ifonly.com
-                      </label>
+                      <label class="control-label email3"></label>
                       <div class="controls">
                         <label class="checkbox">
                           <input type="checkbox"> General
@@ -208,6 +196,11 @@
     <script src="./bootstrap-modal.js"></script>
     <script src="./bootstrap-carousel.js"></script>
     <script type="text/javascript">
+      $('button.ask').click(function(e) {
+        $('.email1').text($('[name=email1]').val())
+        $('.email2').text($('[name=email2]').val())
+        $('.email3').text($('[name=email3]').val())
+      });
       $('#myCarousel').carousel({
         interval: false
       });
