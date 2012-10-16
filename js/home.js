@@ -1,24 +1,41 @@
 // javascript for index.html
 
-$('button.ask').click(function(e) {
-  $('.email1').text($('[name=email1]').val());
-  //$('.email2').text($('[name=email2]').val());
-  //$('.email3').text($('[name=email3]').val());
-});
-//$('button.add-reviewer').click(function(e) {
-//  $()
-//});
+//carousel should not be on auto
 $('#reviewCarousel').carousel({
   interval: false
 });
+
+// clicking the "Ask >>" button
+$('button.ask').click(function(e) {
+  var reviewerEmail = $('[name=email1]').val();
+  var yourEmail = $('[name=youremail]').val();
+  if (reviewerEmail !== '') {
+    $('.email1').text(reviewerEmail);
+    if (yourEmail !== '') {
+      $('#reviewCarousel').carousel('next');
+    }
+  }
+});
+
+// clicking the "Send!" button
+$('button.send').click(function(e) {
+  // get the array of customizations requested
+  var customizations = [];
+  $('input:checkbox[name="competency"]:checked').each(function(index) {
+    customizations.push($(this).val());
+  });
+  // move on
+  $('#reviewCarousel').carousel('next');
+});
+
 $('.carousel-next').click(function(e) {
   $('#reviewCarousel').carousel('next');
-  e.preventDefault();
 });
+
 $('.carousel-prev').click(function(e) {
   $('#reviewCarousel').carousel('prev');
-  e.preventDefault();
 });
-//$('#reviewCarousel').on('slid', function(a, b ,c) {
-//  console.log(a, b, c);
+
+//$('button.add-reviewer').click(function(e) {
+//  $()
 //});
