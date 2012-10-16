@@ -2,18 +2,23 @@
 <html>
   <head>
     <link rel="stylesheet" href="./bootstrap.css">
+    <style>
+      .container-fluid {
+        padding-right: 0px;
+      }
+    </style>
   </head>
   <body data-spy="scroll" data-target=".navbar">
-    <div class="container">
-      <div class="row">
+    <div class="container-fluid">
+      <div class="row-fluid">
         <div class="span3">
-          <div class="sidebar-nav" style="text-align:right;" >
+          <div class="sidebar-nav" style="float: bottom; text-align:right;" >
             <h1>Ground<span style="color:grey">Floor</span></h1>
             <h2 style="letter-spacing: 3px">{LABS}</h2>
           </div><!--/.well -->
         </div><!--/span-->
-        <div>
-          <div class="span4">
+        <div class="span9" style="padding:40px; background:#eee">
+          <div class="span4" style:>
             <form class="form-inline">
               <legend>Get Feedback!</legend>
               <div class="control-group">
