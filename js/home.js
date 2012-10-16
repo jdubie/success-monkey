@@ -7,10 +7,10 @@ $('#reviewCarousel').carousel({
 
 // clicking the "Ask >>" button
 $('button.ask').click(function(e) {
-  var reviewerEmail = $('[name=email1]').val();
-  var yourEmail = $('[name=youremail]').val();
+  var reviewerEmail = $('[name=reviewer-email]').val();
+  var yourEmail = $('[name=your-email]').val();
   if (reviewerEmail !== '') {
-    $('.email1').text(reviewerEmail);
+    $('label.reviewer').text(reviewerEmail);
     if (yourEmail !== '') {
       $('#reviewCarousel').carousel('next');
     }
