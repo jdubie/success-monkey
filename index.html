@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <link rel="stylesheet" href="./bootstrap.css">
@@ -17,7 +18,25 @@
           <div class="hero-unit">
             <h1>Hello, world!</h1>
             <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-            <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+            <form class="form-inline">
+              <legend>Get Feedback!</legend>
+              <div class="control-group">
+                <div class="controls">
+                  <input type="text" placeholder="boss@acme.com">
+                </div>
+              </div>
+              <div class="control-group">
+                <div class="controls">
+                  <input type="text" placeholder="friend@getsome.com">
+                </div>
+              </div>
+              <div class="control-group">
+                <div class="controls">
+                  <input type="text" placeholder="sig_other@ifonly.com">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-large">Ask &raquo;</button>
+            </form>
           </div>
           <div class="row-fluid">
             <div class="span4">
@@ -59,24 +78,4 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script src="./bootstrap-scrollspy.js"></script>
   </body>
-
-  <form>
-    <legend>Get Feedback!</legend>
-    <div class="control-group">
-      <div class="controls">
-        <input type="text" placeholder="boss@acme.com">
-      </div>
-    </div>
-    <div class="control-group">
-      <div class="controls">
-        <input type="text" placeholder="friend@getsome.com">
-      </div>
-    </div>
-    <div class="control-group">
-      <div class="controls">
-        <input type="text" placeholder="sig_other@ifonly.com">
-      </div>
-    </div>
-    <button type="submit" class="btn btn-success">Ask!</button>
-  </form>
 </html>
