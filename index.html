@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="./bootstrap.css">
+    <link rel="stylesheet" href="./css/bootstrap.css">
     <!---
     <style>
       .container-fluid {
-        padding-right: 0px;
+      padding-right: 0px;
       }
     </style>
     -->
@@ -15,10 +15,10 @@
       //var TestObject = Parse.Object.extend("TestObject");
       //var testObject = new TestObject();
       //testObject.save({foo: "bar"}, {
-      //    success: function(object) {
-      //      alert("yay! it worked");
-      //    }
-      //});
+        //    success: function(object) {
+          //      alert("yay! it worked");
+          //    }
+        //});
     </script>
   </head>
   <body data-spy="scroll" data-target=".navbar" background="dark-wood-flooring.jpg">
@@ -31,8 +31,7 @@
           </div><!--/.well -->
         </div><!--/span-->
         <div class="span9" style="padding:40px;">
-          <div class="span6">
-
+          <div class="row">
             <div id="reviewCarousel" class="carousel slide well">
               <!-- Carousel items -->
               <div class="carousel-inner">
@@ -152,7 +151,7 @@
             </div>
           </div>
 
-          <div class="span3" style="color:#ddd;">
+          <div class="row" style="color:#ddd;">
             <h3>Request</h3>
             <p>feedback from the people you trust</p>
 
@@ -170,35 +169,10 @@
     </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script src="./bootstrap-transition.js"></script>
-    <script src="./bootstrap-scrollspy.js"></script>
-    <script src="./bootstrap-modal.js"></script>
-    <script src="./bootstrap-carousel.js"></script>
-    <script type="text/javascript">
-      $('button.ask').click(function(e) {
-        $('.email1').text($('[name=email1]').val());
-        //$('.email2').text($('[name=email2]').val());
-        //$('.email3').text($('[name=email3]').val());
-      });
-      $('button.add-reviewer').click(function(e) {
-        $()
-      });
-      $('#reviewCarousel').carousel({
-        interval: false
-      });
-      $('.carousel-next').click(function(e) {
-        $('#reviewCarousel').carousel('next');
-        $('#reviewCarousel').carousel('pause');
-        e.preventDefault();
-      });
-      $('.carousel-prev').click(function(e) {
-        $('#reviewCarousel').carousel('prev');
-        $('#reviewCarousel').carousel('pause');
-        e.preventDefault();
-      });
-      //$('#reviewCarousel').on('slid', function(a, b ,c) {
-      //  console.log(a, b, c);
-      //});
-    </script>
+    <script src="./js/bootstrap-transition.js"></script>
+    <script src="./js/bootstrap-scrollspy.js"></script>
+    <script src="./js/bootstrap-modal.js"></script>
+    <script src="./js/bootstrap-carousel.js"></script>
+    <script type="text/javascript" src="./js/home.js"></script>
   </body>
 </html>
