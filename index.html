@@ -2,24 +2,26 @@
 <html>
   <head>
     <link rel="stylesheet" href="./bootstrap.css">
+    <!---
     <style>
       .container-fluid {
         padding-right: 0px;
       }
     </style>
+    -->
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.1.5.min.js"></script>
     <script>
-      Parse.initialize("YnHhhC3jwAKf99UauDqmeF8qw64Z36wpgBmQwLRo", "tG1LUW3ghdaXksSwMuDWGbQ0at7bmXkQt6SIWYF0");
-      var TestObject = Parse.Object.extend("TestObject");
-      var testObject = new TestObject();
-      testObject.save({foo: "bar"}, {
-        success: function(object) {
-          alert("yay! it worked");
-        }
-      });
+      //Parse.initialize("YnHhhC3jwAKf99UauDqmeF8qw64Z36wpgBmQwLRo", "tG1LUW3ghdaXksSwMuDWGbQ0at7bmXkQt6SIWYF0");
+      //var TestObject = Parse.Object.extend("TestObject");
+      //var testObject = new TestObject();
+      //testObject.save({foo: "bar"}, {
+      //    success: function(object) {
+      //      alert("yay! it worked");
+      //    }
+      //});
     </script>
   </head>
-  <body data-spy="scroll" data-target=".navbar">
+  <body data-spy="scroll" data-target=".navbar" background="dark-wood-flooring.jpg">
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span3">
@@ -28,12 +30,12 @@
             <h2 style="letter-spacing: 3px">{LABS}</h2>
           </div><!--/.well -->
         </div><!--/span-->
-        <div class="span9" style="padding:40px; background:#eee">
-          <div class="span5" style:>
+        <div class="span9" style="padding:40px; background:#bbb">
+          <div class="span4">
             <form class="form-inline">
               <p>
-                <h3>Get Feedback</h3>
-                from people you work with.
+              <h3>Get Feedback</h3>
+              from people you work with.
               </p>
               <div class="control-group">
                 <div class="controls">
@@ -50,11 +52,68 @@
                   <input type="text" placeholder="sig_other@ifonly.com">
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary btn-large">Ask &raquo;</button>
+              <a data-toggle="modal" href="#relationModal" class="btn btn-primary btn-large">Ask &raquo;</a>
+
             </form>
           </div>
 
-          <div class="span4">
+
+          <div id="relationModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+              <h3 id="myModalLabel">Relationship to you</h3>
+            </div>
+            <div class="modal-body">
+              <form class="form-horizontal">
+                <div class="control-group">
+                  <label class="control-label">
+                    boss@acme.com
+                  </label>
+                  <div class="controls">
+                    <select>
+                      <option>Manager</option>
+                      <option>Peer</option>
+                      <option>Direct Report</option>
+                      <option>Friend</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">
+                    friend@getsome.com
+                  </label>
+                  <div class="controls">
+                    <select>
+                      <option>Manager</option>
+                      <option>Peer</option>
+                      <option>Direct Report</option>
+                      <option>Friend</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">
+                    sig_other@ifonly.com
+                  </label>
+                  <div class="controls">
+                    <select>
+                      <option>Manager</option>
+                      <option>Peer</option>
+                      <option>Direct Report</option>
+                      <option>Friend</option>
+                    </select>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary">Customize Feedback &raquo;</button>
+            </div>
+          </div>
+
+
+          <div class="span5">
             <h3>Request</h3>
             <p>feedback from the people you trust</p>
 
@@ -72,6 +131,8 @@
     </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="./bootstrap-transition.js"></script>
     <script src="./bootstrap-scrollspy.js"></script>
+    <script src="./bootstrap-modal.js"></script>
   </body>
 </html>
