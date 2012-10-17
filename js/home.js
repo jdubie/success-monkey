@@ -1,6 +1,12 @@
 // javascript for index.html
 var emailRegex = /\w+@\w+\.\w+/;
 
+$(document).ready(function() {
+  for (var i = 1; i < 6; i++) {
+    $('#reviewers').append(ich.reviewer({emailName: 'email' + i}));
+  }
+});
+
 //carousel should not be on auto
 $('#reviewCarousel').carousel({
   interval: false
@@ -8,13 +14,23 @@ $('#reviewCarousel').carousel({
 
 // clicking the "Ask >>" button
 $('button.ask').click(function(e) {
-  var reviewerEmail = $('[name=reviewer-email]').val();
   var yourEmail = $('[name=your-email]').val();
-  if (emailRegex.test(reviewerEmail)) {
-    $('label.reviewer').text(reviewerEmail);
-    if (emailRegex.test(yourEmail)) {
-      $('#reviewCarousel').carousel('next');
+  console.log('yourEmail', yourEmail);
+  if (emailRegex.test(yourEmail)) {
+    console.log('your email checks');
+    var reviewerEmails = [];
+    for (var i = 1; i < 6; i++) {
+      var reviewerEmail = $('[name=email' + i + ']').val();
+      if (emailRegex.test(reviewerEmail)) {
+        reviewerEmails.push(reviewerEmail);
+      }
     }
+    console.log('reviewerEmails', reviewerEmails);
+    $('#competencies').html('');
+    for (var i = 0; i < reviewerEmails.length; i++) {
+      $('#competencies').append(ich.competencyForm({emailName: reviewerEmails[i]}));
+    }
+    $('#reviewCarousel').carousel('next');
   }
 });
 
