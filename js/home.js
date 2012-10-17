@@ -1,4 +1,5 @@
 // javascript for index.html
+var emailRegex = /\w+@\w+\.\w+/;
 
 //carousel should not be on auto
 $('#reviewCarousel').carousel({
@@ -9,9 +10,9 @@ $('#reviewCarousel').carousel({
 $('button.ask').click(function(e) {
   var reviewerEmail = $('[name=reviewer-email]').val();
   var yourEmail = $('[name=your-email]').val();
-  if (reviewerEmail !== '') {
+  if (emailRegex.test(reviewerEmail)) {
     $('label.reviewer').text(reviewerEmail);
-    if (yourEmail !== '') {
+    if (emailRegex.test(yourEmail)) {
       $('#reviewCarousel').carousel('next');
     }
   }
