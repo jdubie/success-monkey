@@ -25,19 +25,23 @@
 
   </head>
 
-  <body background="img/dark-wood-flooring.jpg">
+  <body data="scroll" data-target=".sidebar-nav" background="img/dark-wood-flooring.jpg">
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span3">
-          <div class="sidebar-nav affix" style="text-align:right;" >
+          <div class="nav sidebar-nav affix" style="text-align:right;" >
             <h1><span style="color:#666">Ground</span><span style="color:#ccc">Floor</span></h1>
             <p style="color: #999;">get real feedback from people you trust</p>
+            <ul class="nav nav-list">
+              <li><a href="#feedback">Request Feedback</a></li>
+              <li><a href="#how-it-works">How it Works</a></li>
+            </ul>
             <a href="mailto:groundfloorlabs@gmail.com">
               contact@groundfloorlabs.com
             </a>
           </div><!--/.well -->
         </div><!--/span-->
-        <div class="span9" style="padding:40px;">
+        <div id="feedback" class="span9" style="padding:40px;">
           <div class="row">
             <div id="reviewCarousel" class="carousel slide well">
               <!-- Carousel items -->
@@ -98,9 +102,15 @@
             <h3>Align</h3>
             <p>your skills with career success</p>
           </div>
+          <section id="how-it-works">
+            <div class="row">
+              <img src="img/how-it-works.svg"></img>
+            </div>
+          </section>
         </div>
       </div>
     </div>
+
 
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
