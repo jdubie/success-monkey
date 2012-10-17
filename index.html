@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <style>
       a:link { color: #CCC; }
       a:visited { color: #999; }
@@ -22,15 +22,17 @@
           //    }
         //});
     </script>
+
   </head>
+
   <body background="img/dark-wood-flooring.jpg">
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span3">
           <div class="sidebar-nav affix" style="text-align:right;" >
             <h1><span style="color:#666">Ground</span><span style="color:#ccc">Floor</span></h1>
-            <h2 style="letter-spacing: 3px; color: #666">{LABS}</h2>
-            <a href="mailto:contact@groundfloorlabs.com">
+            <p style="color: #999;">get real feedback from people you trust</p>
+            <a href="mailto:groundfloorlabs@gmail.com">
               contact@groundfloorlabs.com
             </a>
           </div><!--/.well -->
@@ -50,66 +52,31 @@
                     </p>
                     <div class="control-group">
                       <div class="controls">
-                        <input type="text" name="your-email" placeholder="your@email.com">
-                        <input type="text" name="reviewer-email" placeholder="boss@acme.com">
-                        <select>
-                          <option>Friend</option>
-                          <option>Manager</option>
-                          <option>Peer</option>
-                          <option>Direct Report</option>
-                        </select>
+                        <input type="text" name="your-name" placeholder="My Name">
+                        <input type="text" name="your-email" placeholder="my@email.com">
                       </div>
                     </div>
+                    <div class="control-group">
+                      <div class="controls">
+                        <label>I would like feedback on:</label>
+                        <input type="text" name="task" placeholder="my recent task/accomplishment">
+                      </div>
+                    </div>
+                    <div id="reviewers"></div>
+                    <button class="btn add-reviewer">+</button>
                   </form>
-                  <!--
-                  <button class="btn add-reviewer">+</button>
-                  -->
-                  <button class="btn btn-primary btn-large ask pull-right">
-                    Ask &raquo;
+                  <button class="btn btn-primary btn-large send pull-right">
+                    Send &raquo;
                   </button>
                 </div>
 
-                <!-- FORM part 2 -->
-                <div class="item">
-                  <form class="form-horizontal">
-                    <p>
-                    <h3>Customize</h3>
-                    your feedback request.
-                    </p>
-                    <div class="control-group">
-                      <label class="control-label reviewer"></label>
-                      <div class="controls">
-                        <label class="checkbox inline">
-                          <input type="checkbox" name="competency" value="general" checked="checked"> General
-                        </label>
-                        <label class="checkbox inline">
-                          <input type="checkbox" name="competency" value="communication"> Communication
-                        </label>
-                        <label class="checkbox inline">
-                          <input type="checkbox" name="competency" value="creativity"> Creativity
-                        </label>
-                        <label class="checkbox inline">
-                          <input type="checkbox" name="competency" value="collaboration"> Collaboration
-                        </label>
-                        <label class="checkbox inline">
-                          <input type="checkbox" name="competency" value="responsibility"> Responsibility
-                        </label>
-                      </div>
-                    </div>
-                  </form>
-                  <button class="btn btn-primary btn-large carousel-prev">
-                    &laquo; Back
-                  </button>
-                  <button class="btn btn-primary btn-large send pull-right">
-                    Send!
-                  </button>
-                </div>
+                <!-- FORM finished -->
                 <div class="item">
                   <h3>Thank you!</h3>
                   <p>
                   Your feedback request has been sent.
                   </p>
-                  <button class="btn btn-primary carousel-next pull-right">
+                  <button class="btn btn-primary finished pull-right">
                     Finish or Send Another
                   </button>
                 </div>
@@ -135,11 +102,29 @@
       </div>
     </div>
 
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script src="./js/bootstrap-transition.js"></script>
-    <script src="./js/bootstrap-scrollspy.js"></script>
-    <script src="./js/bootstrap-modal.js"></script>
-    <script src="./js/bootstrap-carousel.js"></script>
-    <script type="text/javascript" src="./js/home.js"></script>
+    <script src="js/bootstrap-transition.js"></script>
+    <script src="js/bootstrap-scrollspy.js"></script>
+    <script src="js/bootstrap-modal.js"></script>
+    <script src="js/bootstrap-carousel.js"></script>
+    <script src="js/ICanHaz.min.js"></script>
+
+    <!-- TODO: put these in templates/ dir and async load w/ $.get -->
+    <script id="reviewer" type="text/html">
+      <div class="control-group">
+        <div class="controls">
+          <input type="text" name="{{ emailName }}" placeholder="trusted_opinion@acme.com">
+          <select>
+            <option>Friend</option>
+            <option>Manager</option>
+            <option>Peer</option>
+            <option>Direct Report</option>
+          </select>
+        </div>
+      </div>
+    </script>
+    <script type="text/javascript" src="js/home.js"></script>
+
   </body>
 </html>
