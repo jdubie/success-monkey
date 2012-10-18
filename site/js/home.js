@@ -42,13 +42,15 @@ $('button.send').click(function(e) {
         task: task
       };
       console.log('data', data);
-      var ReviewRequestObject = Parse.Object.extend("ReviewRequestObject");
-      var reviewRequest = new ReviewRequestObject();
-      reviewRequest.save(data, {
-        success: function(obj) {
-          console.log('saved review request', obj);
-        }
-      });
+      if (['test.thelifeswap.com', 'groundfloorlabs.com'].indexOf(window.location.hostname) !== -1) {
+        var ReviewRequestObject = Parse.Object.extend("ReviewRequestObject");
+        var reviewRequest = new ReviewRequestObject();
+        reviewRequest.save(data, {
+          success: function(obj) {
+            console.log('saved review request', obj);
+          }
+        });
+      }
       $('#reviewCarousel').carousel('next');
     }
   }
