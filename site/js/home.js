@@ -1,6 +1,6 @@
 // javascript for index.html
 var EMAIL_REGEX = /\w+@\w+\.\w+/;
-var DEFAULT_REVIEWERS = 5;
+var DEFAULT_REVIEWERS = 3;
 
 var numReviewers = 0;
 var yourEmail;
