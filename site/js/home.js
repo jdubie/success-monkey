@@ -55,11 +55,11 @@ $('button.ask').click(function(e) {
 
     if (reviewType === 'task') {
       $('#review-type').html(ich.taskReview());
-      mixpanel.track('review type chosen', {reviewType: 'task'});
     } else if (reviewType === 'general') {
       $('#review-type').html(ich.generalReview());
-      mixpanel.track('review type chosen', {reviewType: 'general'});
     }
+    if (PROD) 
+      mixpanel.track('review type chosen', {reviewType: reviewType});
     $('#reviewCarousel').carousel('next');
   }
 });

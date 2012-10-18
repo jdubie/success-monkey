@@ -46,6 +46,11 @@ class ParseData
     ], (err, res) =>
       callback(err, {@generalFeedbackRequests, @taskFeedbackRequests})
 
+  getUnsentFeedbackRequests: =>
+    generalFeedbackRequests:
+      xx for xx in @generalFeedbackRequests when not xx.emailSent
+    taskFeedbackRequests:
+      xx for xx in @taskFeedbackRequests when not xx.emailSent
 
 class FeedbackMailer
   constructor: ->
@@ -81,5 +86,7 @@ async.series [
 # (callback) ->
 #   mailer.sendFeedbackRequest(null, callback)
 ], (err, res) ->
+  unsent = parseData.getUnsentFeedbackRequests()
+  console.log 'unsent', unsent
   console.log 'DONE!'
   mailer.done()
