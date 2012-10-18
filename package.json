@@ -6,6 +6,7 @@
     "coffee-script": "*",
     "coffeelint": "*",
     "async": "*",
-    "request": "*"
+    "request": "*",
+    "nodemailer": "*"
   }
 }

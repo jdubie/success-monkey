@@ -1,36 +1,85 @@
 #!/usr/bin/env coffee
 
-async   = require('async')
-request = require('request')
+async      = require('async')
+request    = require('request')
+nodemailer = require('nodemailer')
 
-APPLICATION_ID = 'QnnoX6Ep3ywvZEWgG52Zy4ZccBmlX4TkZjeQZzDP'
-REST_API_KEY   = 'fA3oPlNgikE0BogeHY0coIyerbJIchv2mXg4GlZg'
-PARSE_DOMAIN   = 'https://api.parse.com'
+class ParseData
+  @APPLICATION_ID: 'QnnoX6Ep3ywvZEWgG52Zy4ZccBmlX4TkZjeQZzDP'
+  @REST_API_KEY  : 'fA3oPlNgikE0BogeHY0coIyerbJIchv2mXg4GlZg'
+  @PARSE_DOMAIN  : 'https://api.parse.com'
 
-parseHeaders =
-  'X-Parse-Application-Id': APPLICATION_ID
-  'X-Parse-REST-API-Key'  : REST_API_KEY
+  @headers:
+    'X-Parse-Application-Id': @APPLICATION_ID
+    'X-Parse-REST-API-Key'  : @REST_API_KEY
 
-CLASSES =
-  general: 'ReviewRequestGeneralObject'
-  task   : 'ReviewRequestTaskObject'
+  @GeneralClass: 'ReviewRequestGeneralObject'
+  @TaskClass   : 'ReviewRequestTaskObject'
 
-async.parallel
-  general: (callback) ->
+  getClassUrl: (klass) =>
+    "#{@constructor.PARSE_DOMAIN}/1/classes/#{klass}"
+
+  fetchGeneralFeedbackRequests: (callback) =>
     opts =
-      url    : "#{PARSE_DOMAIN}/1/classes/#{CLASSES.general}"
+      url    : @getClassUrl(@constructor.GeneralClass)
       method : 'GET'
       json   : true
-      headers: parseHeaders
-    request opts, (err, res, body) ->
-      callback(err, body.results)
-  task: (callback) ->
+      headers: @constructor.headers
+    request opts, (err, res, body) =>
+      @generalFeedbackRequests = body.results if body?
+      callback(err, @generalFeedbackRequests)
+
+  fetchTaskFeedbackRequests: (callback) =>
     opts =
-      url    : "#{PARSE_DOMAIN}/1/classes/#{CLASSES.task}"
+      url    : @getClassUrl(@constructor.TaskClass)
       method : 'GET'
       json   : true
-      headers: parseHeaders
-    request opts, (err, res, body) ->
-      callback(err, body.results)
-, (err, res) ->
-  console.log 'res', res
+      headers: @constructor.headers
+    request opts, (err, res, body) =>
+      @taskFeedbackRequests = body.results if body?
+      callback(err, @taskFeedbackRequests)
+
+  fetchFeedbackRequests: (callback) =>
+    async.parallel [
+      @fetchGeneralFeedbackRequests
+      @fetchTaskFeedbackRequests
+    ], (err, res) =>
+      callback(err, {@generalFeedbackRequests, @taskFeedbackRequests})
+
+
+class FeedbackMailer
+  constructor: ->
+    @mailer = nodemailer.createTransport('SMTP', {
+      service: "Gmail"
+      auth:
+        user: process.env.GROUNDFLOOR_GMAIL_USER
+        pass: process.env.GROUNDFLOOR_GMAIL_PASS
+    })
+
+  sendFeedbackRequest: (data, callback) =>
+    opts =
+      from: "GroundFloor Labs <#{process.env.GROUNDFLOOR_GMAIL_USER}>"
+      to: "aotimme@stanford.edu"
+      subject: "Feedback Request"
+      text: "Alden is looking for feedback on something!"
+    @mailer.sendMail opts, (err, res) =>
+      console.log 'sendMail', err, res
+      callback(err, res)
+
+  done: =>
+    @mailer.close()
+
+
+parseData = new ParseData()
+mailer = new FeedbackMailer()
+
+async.series [
+  (callback) ->
+    parseData.fetchFeedbackRequests (err, requests) ->
+      console.log requests
+      callback()
+# (callback) ->
+#   mailer.sendFeedbackRequest(null, callback)
+], (err, res) ->
+  console.log 'DONE!'
+  mailer.done()

@@ -70,7 +70,8 @@ $('button.send').click(function(e) {
   var data = {
     name: yourName,
     from: yourEmail,
-    to: reviewerEmails
+    to: reviewerEmails,
+    emailSent: false
   };
   if (reviewType === 'task') {
     data.task = $('[name=task]').val()
