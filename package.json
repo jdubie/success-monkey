@@ -1,0 +1,11 @@
+{
+  "name": "success-monkey",
+  "version": "0.0.1",
+  "description": "GroundFloorLabs",
+  "dependencies": {
+    "coffee-script": "*",
+    "coffeelint": "*",
+    "async": "*",
+    "request": "*"
+  }
+}
