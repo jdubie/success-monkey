@@ -1,10 +1,24 @@
 // javascript for index.html
-var emailRegex = /\w+@\w+\.\w+/;
+var EMAIL_REGEX = /\w+@\w+\.\w+/;
+var DEFAULT_REVIEWERS = 5;
+
 var numReviewers = 0;
+var yourEmail;
+var yourName;
+var reviewType;
+var reviewerEmails;
+
+var initializeReviewers = function() {
+  $('#reviewers').html('');
+  numReviewers = 0;
+  for (var i = 0; i < DEFAULT_REVIEWERS; i++) {
+    $('#reviewers').append(ich.reviewer({emailName: 'email' + numReviewers}));
+    numReviewers++;
+  }
+}
 
 $(document).ready(function() {
-  $('#reviewers').append(ich.reviewer({emailName: 'email' + numReviewers}));
-  numReviewers++;
+  initializeReviewers();
 });
 
 //carousel should not be on auto
@@ -18,48 +32,69 @@ $('button.add-reviewer').click(function(e) {
   numReviewers++;
 });
 
-// clicking the "Send >>" button
-$('button.send').click(function(e) {
-  var yourEmail = $('[name=your-email]').val();
-  var yourName = $('[name=your-name]').val();
-  var task = $('[name=task]').val();
-  var reviewerEmails = [];
+// clicking the "Ask >>" button
+$('button.ask').click(function(e) {
+  yourEmail = $('[name=your-email]').val();
+  yourName = $('[name=your-name]').val();
+  reviewType = $('[name=reviewType]:checked').val();
+  reviewerEmails = [];
 
   console.log('yourEmail', yourEmail);
   // verify your email
-  if (emailRegex.test(yourEmail)) {
+  if (EMAIL_REGEX.test(yourEmail)) {
     for (var i = 0; i < numReviewers; i++) {
       var reviewerEmail = $('[name=email' + i + ']').val();
-      if (emailRegex.test(reviewerEmail)) {
+      if (EMAIL_REGEX.test(reviewerEmail)) {
         reviewerEmails.push(reviewerEmail);
       }
     }
-    if (task !== '') {
-      var data = {
-        name: yourName,
-        from: yourEmail,
-        to: reviewerEmails,
-        task: task
-      };
-      console.log('data', data);
-      if (['test.thelifeswap.com', 'groundfloorlabs.com'].indexOf(window.location.hostname) !== -1) {
-        var ReviewRequestObject = Parse.Object.extend("ReviewRequestObject");
-        var reviewRequest = new ReviewRequestObject();
-        reviewRequest.save(data, {
-          success: function(obj) {
-            console.log('saved review request', obj);
-          }
-        });
-      }
-      $('#reviewCarousel').carousel('next');
+    console.log('reviewerEmails', reviewerEmails);
+
+    if (reviewType === 'task') {
+      $('#review-type').html(ich.taskReview());
+    } else if (reviewType === 'general') {
+      $('#review-type').html(ich.generalReview());
     }
+    $('#reviewCarousel').carousel('next');
   }
 });
 
+// clicked "Send!"
+$('button.send').click(function(e) {
+  var data = {
+    name: yourName,
+    from: yourEmail,
+    to: reviewerEmails
+  };
+  if (reviewType === 'task') {
+    data.task = $('[name=task]').val()
+  } else if (reviewType === 'general') {
+    data.areas = [];
+    $('input:checkbox[name="competencies"]:checked').each(function() {
+      data.areas.push($(this).val());
+    });
+  }
+  console.log('data', data);
+
+  if (['test.thelifeswap.com', 'groundfloorlabs.com'].indexOf(window.location.hostname) !== -1) {
+    var ReviewRequestObject;
+    if (reviewType === 'task') {
+      ReviewRequestObject = Parse.Object.extend("ReviewRequestTaskObject");
+    } else if (reviewType === 'general') {
+      ReviewRequestObject = Parse.Object.extend("ReviewRequestGeneralObject");
+    }
+    var reviewRequest = new ReviewRequestObject();
+    reviewRequest.save(data, {
+      success: function(obj) {
+        console.log('saved review request', obj);
+      }
+    });
+  }
+  $('#reviewCarousel').carousel('next');
+});
+
 $('button.finished').click(function(e) {
-  // clear reviewers and task
-  $('#reviewers').html('');
-  numReviewers = 0;
-  $('#reviewers').append(ich.reviewer({emailName: 'email' + numReviewers}));
+  // clear reviewers
+  initializeReviewers();
   $('#reviewCarousel').carousel('next');
 });

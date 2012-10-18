@@ -51,19 +51,35 @@
                       <div class="controls">
                         <input type="text" name="your-name" placeholder="My Name">
                         <input type="text" name="your-email" placeholder="my@email.com">
-                      </div>
-                    </div>
-                    <div class="control-group">
-                      <div class="controls">
-                        <label>I would like feedback on:</label>
-                        <input type="text" name="task" placeholder="my recent task/accomplishment">
+                        <br/>
+                        <br/>
                       </div>
                     </div>
                     <div id="reviewers"></div>
                     <button class="btn add-reviewer">+</button>
+                    <div class="control-group">
+                      <div class="controls">
+                        <label class="radio">
+                          <input type="radio" name="reviewType" value="general" checked>general performance
+                        </label>
+                      </div>
+                      <div class="controls">
+                        <label class="radio">
+                          <input type="radio" name="reviewType" value="task">a recent task/accomplishment
+                        </label>
+                      </div>
+                    </div>
                   </form>
+                  <button class="btn btn-primary btn-large ask pull-right">
+                    Ask &raquo;
+                  </button>
+                </div>
+
+                <!-- FORM step 2 -->
+                <div class="item">
+                  <div id="review-type"></div>
                   <button class="btn btn-primary btn-large send pull-right">
-                    Send &raquo;
+                    Send!
                   </button>
                 </div>
 
@@ -124,6 +140,33 @@
             <option>Peer</option>
             <option>Direct Report</option>
           </select>
+        </div>
+      </div>
+    </script>
+    <script id="generalReview" type="text/html">
+      <div class="control-group">
+        <div class="controls">
+          <label class="checkbox">
+            <input type="checkbox" name="competencies" value="general" checked> general
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" name="competencies" value="communication"> communication
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" name="competencies" value="creativity"> creativity
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" name="competencies" value="responsibility"> responsibility
+          </label>
+        </div>
+      </div>
+    </script>
+    <script id="taskReview" type="text/html">
+      <div class="control-group">
+        <div class="controls">
+          <label>I would like feedback on:
+            <input type="text" name="task" placeholder="my recent task/accomplishment">
+          </label>
         </div>
       </div>
     </script>
