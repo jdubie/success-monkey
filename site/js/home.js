@@ -76,7 +76,7 @@ $('button.send').click(function(e) {
   }
   console.log('data', data);
 
-  if (['test.thelifeswap.com', 'groundfloorlabs.com'].indexOf(window.location.hostname) !== -1) {
+  if (['test.thelifeswap.com', 'groundfloorlabs.com', 'www.groundfloorlabs.com'].indexOf(window.location.hostname) !== -1) {
     var ReviewRequestObject;
     if (reviewType === 'task') {
       ReviewRequestObject = Parse.Object.extend("ReviewRequestTaskObject");
