@@ -37,11 +37,18 @@ $('button.send').click(function(e) {
     if (task !== '') {
       var data = {
         name: yourName,
-        email: yourEmail,
-        task: task,
-        reviewers: reviewerEmails
+        from: yourEmail,
+        to: reviewerEmails,
+        task: task
       };
       console.log('data', data);
+      var ReviewRequestObject = Parse.Object.extend("ReviewRequestObject");
+      var reviewRequest = new ReviewRequestObject();
+      reviewRequest.save(data, {
+        success: function(obj) {
+          console.log('saved review request', obj);
+        }
+      });
       $('#reviewCarousel').carousel('next');
     }
   }
