@@ -141,11 +141,11 @@
       <div class="control-group">
         <div class="controls">
           <input type="text" name="{{ emailName }}" placeholder="trusted_opinion@acme.com">
-          <select>
-            <option>Friend</option>
-            <option>Manager</option>
-            <option>Peer</option>
-            <option>Direct Report</option>
+          <select name="relationship_{{ emailName }}">
+            <option value="colleague">Colleague</option>
+            <option value="manager">Manager</option>
+            <option value="direct_report">Direct Report</option>
+            <option value="friend">Friend</option>
           </select>
         </div>
       </div>

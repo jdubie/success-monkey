@@ -7,6 +7,7 @@ var yourEmail;
 var yourName;
 var reviewType;
 var reviewerEmails;
+var reviewerRelationships;
 
 var PROD = ['test.thelifeswap.com', 'groundfloorlabs.com', 'www.groundfloorlabs.com'].indexOf(window.location.hostname) !== -1
 
@@ -21,12 +22,11 @@ var initializeReviewers = function() {
 
 $(document).ready(function() {
   initializeReviewers();
+  if (PROD) mixpanel.track('arrived home');
 });
 
 //carousel should not be on auto
-$('#reviewCarousel').carousel({
-  interval: false
-});
+$('#reviewCarousel').carousel({interval: false});
 
 $('button.add-reviewer').click(function(e) {
   e.preventDefault();
@@ -41,6 +41,7 @@ $('button.ask').click(function(e) {
   yourName = $('[name=your-name]').val();
   reviewType = $('[name=reviewType]:checked').val();
   reviewerEmails = [];
+  reviewerRelationships = [];
 
   console.log('yourEmail', yourEmail);
   // verify your email
@@ -49,9 +50,13 @@ $('button.ask').click(function(e) {
       var reviewerEmail = $('[name=email' + i + ']').val();
       if (EMAIL_REGEX.test(reviewerEmail)) {
         reviewerEmails.push(reviewerEmail);
+        var selector = '[name=relationship_email' + i + '] option:selected';
+        var relationship = $(selector).val();
+        reviewerRelationships.push(relationship);
       }
     }
     console.log('reviewerEmails', reviewerEmails);
+    console.log('reviewerRelationships', reviewerRelationships);
 
     if (reviewType === 'task') {
       $('#review-type').html(ich.taskReview());
@@ -71,6 +76,7 @@ $('button.send').click(function(e) {
     name: yourName,
     from: yourEmail,
     to: reviewerEmails,
+    relationships: reviewerRelationships,
     emailSent: false
   };
   if (reviewType === 'task') {
