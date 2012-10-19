@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap-responsive.css">
     <style>
       a:link { color: #CCC; }
       a:visited { color: #999; }
@@ -28,20 +30,19 @@
   <body data="scroll" data-target=".sidebar-nav" background="img/dark-wood-flooring.jpg">
     <div class="container-fluid">
       <div class="row-fluid">
-        <div class="span3">
-          <div class="nav sidebar-nav affix" style="text-align:right;" >
-            <h1><span style="color:#666">Ground</span><span style="color:#ccc">Floor</span></h1>
-            <p style="color: #999;">get real feedback from people you trust</p>
+        <div class="span3"></div>
+        <div id="feedback" class="span6" style="padding:20px;">
+          <div class="row">
+            <h1>
+              <span style="color:#666">Ground</span><span style="color:#ccc">Floor</span>
+              <small>{LABS}</small>
+            </h1>
             <ul class="nav nav-list">
               <li><a href="#feedback">Request Feedback</a></li>
               <li><a href="#how-it-works">How it Works</a></li>
             </ul>
-            <a href="mailto:groundfloorlabs@gmail.com">
-              contact@groundfloorlabs.com
-            </a>
-          </div><!--/.well -->
-        </div><!--/span-->
-        <div id="feedback" class="span9" style="padding:40px;">
+          </div>
+          <br />
           <div class="row">
             <div id="reviewCarousel" class="carousel slide well">
               <!-- Carousel items -->
@@ -52,7 +53,7 @@
                   <form class="form-inline">
                     <p>
                     <h3>Get Feedback</h3>
-                    from people you interact with.
+                    from people you trust
                     </p>
                     <div class="control-group">
                       <div class="controls">
@@ -124,7 +125,17 @@
             </div>
           </section>
         </div>
+        <div class="span3"></div>
       </div>
+
+      <footer style="text-align: center;">
+        <a href="mailto:groundfloorlabs@gmail.com">
+          contact@groundfloorlabs.com
+        </a>
+        <br />
+        <br />
+      </footer>
+
     </div>
 
 
