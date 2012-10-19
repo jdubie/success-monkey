@@ -113,3 +113,20 @@ $('button.finished').click(function(e) {
   initializeReviewers();
   $('#reviewCarousel').carousel('next');
 });
+
+// HR request
+$('.btn.hr-request').click(function(e) {
+  var hrEmail = $('[name=hr-email]').val();
+  console.log('hr request:', hrEmail);
+  if (PROD) {
+    var HRRequestObject = Parse.Object.extend("HRRequestObject");
+    var hrRequest = new HRRequestObject();
+    hrRequest.save({email: hrEmail}, {
+      success: function(obj) {
+        console.log('saved review request', obj);
+      }
+    });
+  }
+  $('[name=hr-email]').val('');
+  $('[name=hr-email]').attr('placeholder', 'Thanks!');
+});
