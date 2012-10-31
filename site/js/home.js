@@ -9,6 +9,40 @@ var reviewType;
 var reviewerEmails;
 var reviewerRelationships;
 var task;
+var generalQuestions = [
+  {
+    name: 'relates',
+    text: "Maintains smooth, effective working relationships."
+  }, {
+    name: 'leverages',
+    text: "Leverages the unique talents and viewpoints of others."
+  }, {
+    name: 'mentor',
+    text: "Acts as a mentor, helping others to develop and advance in their careers."
+  }, {
+    name: 'pushes',
+    text: "Pushes the organization to adopt new initiatives."
+  }, {
+    name: 'discuss',
+    text: "Encourages direct and open discussions about important issues."
+  }, {
+    name: 'communicates',
+    text: "Tailors communication based on other's needs and motivations."
+  }, {
+    name: 'decisive',
+    text: "Acts decisively to tackle difficult problems."
+  }, {
+    name: 'confident',
+    text: "Projects confidence and poise."
+  }, {
+    name: 'weaknesses',
+    text: "Understands own weaknesses and how to compensate for them."
+  }, {
+    name: 'promises',
+    text: "Follows through on promises."
+  }
+];
+
 
 var PROD = ['test.thelifeswap.com', 'groundfloorlabs.com', 'www.groundfloorlabs.com'].indexOf(window.location.hostname) !== -1
 
@@ -94,9 +128,9 @@ $('button.ask').click(function(e) {
   console.log('reviewerRelationships', reviewerRelationships);
 
   if (reviewType === 'task') {
-    $('#review-type').html(ich.taskReview());
+    $('#self-review').html(ich.taskReview({task: task}));
   } else if (reviewType === 'general') {
-    $('#review-type').html(ich.generalReview());
+    $('#self-review').html(ich.generalReview({questions: generalQuestions}));
   }
   if (PROD) 
     mixpanel.track('review type chosen', {reviewType: reviewType});
@@ -106,6 +140,7 @@ $('button.ask').click(function(e) {
 
 // clicked "Send!"
 $('button.send').click(function(e) {
+  e.preventDefault();
 
   var data = {
     name: yourName,
@@ -114,14 +149,6 @@ $('button.send').click(function(e) {
     relationships: reviewerRelationships,
     emailSent: false
   };
-  if (reviewType === 'task') {
-    data.task = $('[name=task]').val()
-  } else if (reviewType === 'general') {
-    data.areas = [];
-    $('input:checkbox[name="competencies"]:checked').each(function() {
-      data.areas.push($(this).val());
-    });
-  }
   console.log('data', data);
 
   if (PROD) {

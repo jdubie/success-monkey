@@ -95,7 +95,7 @@
 
               <!-- FORM step 2 -->
               <div class="item2 hide">
-                <div id="review-type"></div>
+                <div id="self-review"></div>
                 <button class="btn btn-primary btn-large send">
                   Send!
                 </button>
@@ -113,22 +113,6 @@
               </div>
             </div>
           </div>
-
-          <!--
-          <div class="row" style="color:#ddd;">
-            <h3>Request</h3>
-            <p>feedback from the people you trust</p>
-
-            <h3>Customize</h3>
-            <p>your feedback for specific competencies</p>
-
-            <h3>Establish</h3>
-            <p>a reputation with optional public endorsements</p>
-
-            <h3>Align</h3>
-            <p>your skills with career success</p>
-          </div>
-          -->
 
           <section id="how-it-works">
             <br />
@@ -164,8 +148,7 @@
 
     </div>
 
-
-
+    <!-- LIBRARIES -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script src="js/bootstrap-transition.js"></script>
     <script src="js/bootstrap-scrollspy.js"></script>
@@ -173,7 +156,6 @@
     <script src="js/ICanHaz.min.js"></script>
 
     <!-- TEMPLATES -->
-
     <!-- TODO: put these in templates/ dir and async load w/ $.get -->
     <script id="reviewer" type="text/html">
       <div class="control-group {{ emailName }}">
@@ -190,36 +172,45 @@
       </div>
     </script>
     <script id="generalReview" type="text/html">
-      <p>
-      <h3>Customize</h3>
-      your feedback
-      </p>
-      <div class="control-group">
-        <div class="controls">
-          <label class="checkbox">
-            <input type="checkbox" name="competencies" value="general" checked> general
-          </label>
-          <label class="checkbox">
-            <input type="checkbox" name="competencies" value="communication"> communication
-          </label>
-          <label class="checkbox">
-            <input type="checkbox" name="competencies" value="creativity"> creativity
-          </label>
-          <label class="checkbox">
-            <input type="checkbox" name="competencies" value="responsibility"> responsibility
-          </label>
+      <h3>Self-Review <small>360</small></h3>
+      <form>
+        {{# questions }}
+        <div class="control-group {{ name }}">
+          <div class="controls">
+            <label>
+              {{ text }}
+            </label>
+            <select name="{{ name }}">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
         </div>
-      </div>
+        {{/ questions }}
+      </form>
     </script>
     <script id="taskReview" type="text/html">
-      <div class="control-group">
-        <div class="controls">
-          <label>I would like feedback on:
-            <input type="text" name="task" placeholder="my recent task/accomplishment">
-          </label>
+      <h3>Self-Review <small>{{ task }}</small></h3>
+      <form>
+        <div class="control-group">
+          <div class="controls">
+            <label>I like...</label>
+            <textarea name="like" placeholder="I like that I..." class="span5" rows="4"></textarea>
+          </div>
         </div>
-      </div>
+        <div class="control-group">
+          <div class="controls">
+            <label>I wish...</label>
+            <textarea name="wish" placeholder="I wish that I..." class="span5" rows="4"></textarea>
+          </div>
+        </div>
+      </form>
     </script>
+
+    <!-- JS -->
     <script type="text/javascript" src="js/home.js"></script>
 
   </body>
