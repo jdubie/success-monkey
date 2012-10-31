@@ -26,9 +26,6 @@ $(document).ready(function() {
   if (PROD) mixpanel.track('arrived home');
 });
 
-//carousel should not be on auto
-$('#reviewCarousel').carousel({interval: false});
-
 var renderErrors = function(errors) {
   for (var i in errors) {
     var ctrlGroup = '.control-group.' + errors[i];
@@ -103,7 +100,8 @@ $('button.ask').click(function(e) {
   }
   if (PROD) 
     mixpanel.track('review type chosen', {reviewType: reviewType});
-  $('#reviewCarousel').carousel('next');
+  $('div.item1').hide('linear');
+  $('div.item2').show('linear');
 });
 
 // clicked "Send!"
@@ -142,13 +140,15 @@ $('button.send').click(function(e) {
       }
     });
   }
-  $('#reviewCarousel').carousel('next');
+  $('div.item2').hide('linear');
+  $('div.item3').show('linear');
 });
 
 $('button.finished').click(function(e) {
   // clear reviewers
   initializeReviewers();
-  $('#reviewCarousel').carousel('next');
+  $('div.item3').hide('linear');
+  $('div.item1').show('linear');
 });
 
 // HR request

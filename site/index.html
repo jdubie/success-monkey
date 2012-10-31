@@ -44,77 +44,72 @@
           </div>
           <br />
           <div class="row">
-            <div id="reviewCarousel" class="carousel slide well">
-              <!-- Carousel items -->
-              <div class="carousel-inner">
-
-                <!-- FORM part 1 -->
-                <div class="active item">
-                  <form class="form-inline">
-                    <p>
-                    <h3>
-                      Get Feedforward
-                      <small>from people you trust</small>
-                    </h3>
-                    </p>
-                    <div class="control-group reviewee-info">
-                      <div class="controls">
-                        <input type="text" name="your-name" placeholder="My Name">
-                        <input type="text" name="your-email" placeholder="my@email.com">
-                        <div class="help-inline"></div>
-                        <br/>
-                        <br/>
-                      </div>
-                    </div>
-                    <div class="control-group general-type">
-                      <label>What type?</label>
-                      <div class="controls">
-                        <label class="radio">
-                          <input type="radio" name="reviewType" value="general">360 for Leaders
-                        </label>
-                      </div>
-                    </div>
-                    <div class="control-group task-type">
-                      <div class="controls">
-                        <label class="radio">
-                          <input type="radio" name="reviewType" value="task">Task-Specific:&nbsp;
-                        </label>
-                        <input type="text" placeholder="my recent task/accomplishment" name="task">
-                        <div class="help-inline"></div>
-                      </div>
-                    </div>
-                    <div class="reviewers-fields hide">
-                      <div class="control-group">
-                        <label>From whom?</label>
-                        <div id="reviewers"></div>
-                      </div>
-                      <button class="btn add-reviewer">+</button>
-                    </div>
-                  </form>
-                  <button class="btn btn-primary btn-large ask pull-right hide">
-                    Ask &raquo;
-                  </button>
-                </div>
-
-                <!-- FORM step 2 -->
-                <div class="item">
-                  <div id="review-type"></div>
-                  <button class="btn btn-primary btn-large send pull-right">
-                    Send!
-                  </button>
-                </div>
-
-                <!-- FORM finished -->
-                <div class="item">
-                  <h3>Thank you!</h3>
+            <div class="well">
+              <!-- FORM part 1 -->
+              <div class="item1 show">
+                <form class="form-inline">
                   <p>
-                  Your feedback request has been sent.
+                  <h3>
+                    Get Feedforward
+                    <small>from people you trust</small>
+                  </h3>
                   </p>
-                  <button class="btn btn-primary finished pull-right">
-                    Finish or Send Another
-                  </button>
-                </div>
+                  <div class="control-group reviewee-info">
+                    <div class="controls">
+                      <input type="text" name="your-name" placeholder="My Name">
+                      <input type="text" name="your-email" placeholder="my@email.com">
+                      <div class="help-inline"></div>
+                      <br/>
+                      <br/>
+                    </div>
+                  </div>
+                  <div class="control-group general-type">
+                    <label>What type?</label>
+                    <div class="controls">
+                      <label class="radio">
+                        <input type="radio" name="reviewType" value="general">360 for Leaders
+                      </label>
+                    </div>
+                  </div>
+                  <div class="control-group task-type">
+                    <div class="controls">
+                      <label class="radio">
+                        <input type="radio" name="reviewType" value="task">Task-Specific:&nbsp;
+                      </label>
+                      <input type="text" placeholder="my recent task/accomplishment" name="task">
+                      <div class="help-inline"></div>
+                    </div>
+                  </div>
+                  <div class="reviewers-fields hide">
+                    <div class="control-group">
+                      <label>From whom?</label>
+                      <div id="reviewers"></div>
+                    </div>
+                    <button class="btn add-reviewer">+</button>
+                  </div>
+                </form>
+                <button class="btn btn-primary btn-large ask hide">
+                  Ask &raquo;
+                </button>
+              </div>
 
+              <!-- FORM step 2 -->
+              <div class="item2 hide">
+                <div id="review-type"></div>
+                <button class="btn btn-primary btn-large send">
+                  Send!
+                </button>
+              </div>
+
+              <!-- FORM finished -->
+              <div class="item3 hide">
+                <h3>Thank you!</h3>
+                <p>
+                Your feedback request has been sent.
+                </p>
+                <button class="btn btn-primary finished">
+                  Finish or Send Another
+                </button>
               </div>
             </div>
           </div>
@@ -175,7 +170,6 @@
     <script src="js/bootstrap-transition.js"></script>
     <script src="js/bootstrap-scrollspy.js"></script>
     <script src="js/bootstrap-modal.js"></script>
-    <script src="js/bootstrap-carousel.js"></script>
     <script src="js/ICanHaz.min.js"></script>
 
     <!-- TEMPLATES -->
