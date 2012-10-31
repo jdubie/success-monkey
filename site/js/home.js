@@ -44,7 +44,8 @@ var generalQuestions = [
 ];
 
 
-var PROD = ['test.thelifeswap.com', 'groundfloorlabs.com', 'www.groundfloorlabs.com'].indexOf(window.location.hostname) !== -1
+var PROD = ['test.thelifeswap.com', 'groundfloorlabs.com', 'www.groundfloorlabs.com'].indexOf(window.location.hostname) !== -1;
+PROD = false;
 
 var initializeReviewers = function() {
   $('#reviewers').html('');
