@@ -8,6 +8,7 @@ var yourName;
 var reviewType;
 var reviewerEmails;
 var reviewerRelationships;
+var task;
 
 var PROD = ['test.thelifeswap.com', 'groundfloorlabs.com', 'www.groundfloorlabs.com'].indexOf(window.location.hostname) !== -1
 
@@ -61,6 +62,7 @@ $('button.ask').click(function(e) {
   reviewType = $('[name=reviewType]:checked').val();
   reviewerEmails = [];
   reviewerRelationships = [];
+  task = null;
 
   var errors = [];
 
@@ -78,6 +80,11 @@ $('button.ask').click(function(e) {
     } else if (reviewerEmail) {
       errors.push(emailName);   // email exists, but error!
     }
+  }
+
+  if (reviewType === 'task') {
+    task = $('[name=task]').val();
+    if (!task) errors.push('task-type');
   }
 
   if (errors.length > 0) {
