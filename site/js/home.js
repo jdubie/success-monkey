@@ -28,14 +28,33 @@ $(document).ready(function() {
 //carousel should not be on auto
 $('#reviewCarousel').carousel({interval: false});
 
+var renderErrors = function(errors) {
+  for (var i in errors) {
+    var ctrlGroup = '.control-group.' + errors[i];
+    $(ctrlGroup).addClass('error');
+    $(ctrlGroup + ' .help-inline').html('<img src="img/red-x.png"></img>');
+  };
+};
+
+var resetErrors = function() {
+  $('.control-group').removeClass('error');
+  $('.control-group .help-inline').html('');
+}
+
 $('button.add-reviewer').click(function(e) {
   e.preventDefault();
   $('#reviewers').append(ich.reviewer({emailName: 'email' + numReviewers}));
   numReviewers++;
 });
 
+$('[name=reviewType]').click(function(e) {
+  $('div.reviewers-fields').show('linear');
+  $('button.ask').show('linear');
+});
+
 // clicking the "Ask >>" button
 $('button.ask').click(function(e) {
+  resetErrors();
   if (PROD) mixpanel.track('clicked ask');
   yourEmail = $('[name=your-email]').val();
   yourName = $('[name=your-name]').val();
@@ -43,30 +62,41 @@ $('button.ask').click(function(e) {
   reviewerEmails = [];
   reviewerRelationships = [];
 
-  console.log('yourEmail', yourEmail);
-  // verify your email
-  if (EMAIL_REGEX.test(yourEmail)) {
-    for (var i = 0; i < numReviewers; i++) {
-      var reviewerEmail = $('[name=email' + i + ']').val();
-      if (EMAIL_REGEX.test(reviewerEmail)) {
-        reviewerEmails.push(reviewerEmail);
-        var selector = '[name=relationship_email' + i + '] option:selected';
-        var relationship = $(selector).val();
-        reviewerRelationships.push(relationship);
-      }
-    }
-    console.log('reviewerEmails', reviewerEmails);
-    console.log('reviewerRelationships', reviewerRelationships);
+  var errors = [];
 
-    if (reviewType === 'task') {
-      $('#review-type').html(ich.taskReview());
-    } else if (reviewType === 'general') {
-      $('#review-type').html(ich.generalReview());
+  // verify your (reviewee) email
+  if (!EMAIL_REGEX.test(yourEmail)) errors.push('reviewee-info');
+  for (var i = 0; i < numReviewers; i++) {
+    var emailName = 'email' + i;
+    var reviewerEmail = $('[name=' + emailName + ']').val();
+
+    if (EMAIL_REGEX.test(reviewerEmail)) {
+      reviewerEmails.push(reviewerEmail);
+      var selector = '[name=relationship_email' + i + '] option:selected';
+      var relationship = $(selector).val();
+      reviewerRelationships.push(relationship);
+    } else if (reviewerEmail) {
+      errors.push(emailName);   // email exists, but error!
     }
-    if (PROD) 
-      mixpanel.track('review type chosen', {reviewType: reviewType});
-    $('#reviewCarousel').carousel('next');
   }
+
+  if (errors.length > 0) {
+    renderErrors(errors);
+    return;
+  }
+
+  console.log('yourEmail', yourEmail);
+  console.log('reviewerEmails', reviewerEmails);
+  console.log('reviewerRelationships', reviewerRelationships);
+
+  if (reviewType === 'task') {
+    $('#review-type').html(ich.taskReview());
+  } else if (reviewType === 'general') {
+    $('#review-type').html(ich.generalReview());
+  }
+  if (PROD) 
+    mixpanel.track('review type chosen', {reviewType: reviewType});
+  $('#reviewCarousel').carousel('next');
 });
 
 // clicked "Send!"
